@@ -2,15 +2,16 @@ package javaCalculator;
 
 import java.util.Scanner; // Importa a classe Scanner para seu usado no projeto.
 
-public class main {
+public class calculator {
     public static void main(String[] args) {
         // 1. Instancia o scanner.
         Scanner scanner = new Scanner(System.in);
 
         // 2. Variáveis do projeto
-        double num1, num2, result = 0;
+        int num1, num2, result = 0;
         char operation;
         int option;
+        boolean hasError = false;
 
         // 3. Entrada de dados do usuário.
         // 3.1 While (true): cria um loop infinito.
@@ -35,41 +36,49 @@ public class main {
                     break;
             }
 
-            // 4.1 Lógica que finaliza o loop (do while) ao escolher a opção 2 (case 2).
+            // 4.1 Lógica que finaliza o loop (do while) ao escolher a opção 2 (case 2) OU
+            // escolher qualquer opção que não seja 1.
             if (option == 2 || option != 1) {
                 break;
             }
 
             System.out.println("Digite um número: ");
-            num1 = scanner.nextDouble();
+            num1 = scanner.nextInt();
 
             System.out.println("Escolha uma operaçãp: +, -, *, ou /");
             operation = scanner.next().charAt(0);
 
             System.out.println("Digite outro número: ");
-            num2 = scanner.nextDouble();
+            num2 = scanner.nextInt();
 
             // 4. Lógica e funcionamento da calculadora.
-            switch (operation) {
-                case '+':
-                    result = num1 + num2;
-                    break;
-                case '-':
-                    result = num1 - num2;
-                    break;
-                case '*':
-                    result = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 != 0) {
+            try {
+                switch (operation) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
                         result = num1 / num2;
-                    } else {
-                        System.out.println("Erro: divisão por zero!");
-                    }
-                    break;
-                default:
-                    System.out.println("Operação inválida! escolha uma operação válida para prosseguir...");
+                        break;
+                    default:
+                        System.out.println("Operação inválida! escolha uma operação válida para prosseguir...");
+                        break;
+                }
+            } catch (ArithmeticException e) {
+                hasError = true;
+                System.out.println("Erro: Não é possível dividir por 0!");
             }
+
+            if (hasError) {
+                break;
+            }
+            
             System.out.println("O resultado é: " + result);
         }
         scanner.close();
