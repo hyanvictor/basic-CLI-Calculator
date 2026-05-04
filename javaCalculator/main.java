@@ -32,10 +32,11 @@ public class main {
                     break;
                 default:
                     System.out.println("Opção inválida.");
+                    break;
             }
 
             // 4.1 Lógica que finaliza o loop (do while) ao escolher a opção 2 (case 2).
-            if (option == 2) {
+            if (option == 2 || option != 1) {
                 break;
             }
 
