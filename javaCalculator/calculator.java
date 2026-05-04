@@ -1,9 +1,7 @@
-package javaCalculator;
-
 import java.util.InputMismatchException;
 import java.util.Scanner; // Importa a classe Scanner para seu usado no projeto.
 
-public class calculator {
+public class Calculator {
     public static void main(String[] args) {
         // 1. Instancia o scanner.
         Scanner scanner = new Scanner(System.in);
@@ -44,8 +42,13 @@ public class calculator {
              * 4.1 Lógica que finaliza o loop (do while) ao escolher a opção 2 (case 2) OU
              * escolher qualquer opção que não seja 1.
              */
-            if (option == 2 || option != 1) {
+            if (option == 2) {
                 break;
+            }
+
+            if (option != 1) {
+                System.out.println("Erro: Opção inválida!");
+                continue;
             }
 
             // 5. Inputs do usuário
