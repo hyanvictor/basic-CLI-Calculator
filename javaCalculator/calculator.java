@@ -91,6 +91,7 @@ public class Calculator {
                     } else if (decision == 2) {
                         hasMenu = true;
                     } else {
+                        System.out.println("\n--- Saindo do programa... ---");
                         break;
                     }
 
