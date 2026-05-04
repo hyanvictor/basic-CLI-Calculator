@@ -1,5 +1,6 @@
 package javaCalculator;
 
+import java.util.InputMismatchException;
 import java.util.Scanner; // Importa a classe Scanner para seu usado no projeto.
 
 public class calculator {
@@ -36,23 +37,26 @@ public class calculator {
                     break;
             }
 
-            // 4.1 Lógica que finaliza o loop (do while) ao escolher a opção 2 (case 2) OU
-            // escolher qualquer opção que não seja 1.
+            /*
+             * 4.1 Lógica que finaliza o loop (do while) ao escolher a opção 2 (case 2) OU
+             * escolher qualquer opção que não seja 1.
+             */
             if (option == 2 || option != 1) {
                 break;
             }
 
-            System.out.println("Digite um número: ");
-            num1 = scanner.nextInt();
-
-            System.out.println("Escolha uma operaçãp: +, -, *, ou /");
-            operation = scanner.next().charAt(0);
-
-            System.out.println("Digite outro número: ");
-            num2 = scanner.nextInt();
-
-            // 4. Lógica e funcionamento da calculadora.
+            // 5. Inputs do usuário
             try {
+                System.out.println("Digite um número: ");
+                num1 = scanner.nextInt();
+
+                System.out.println("Escolha uma operaçãp: +, -, *, ou /");
+                operation = scanner.next().charAt(0);
+
+                System.out.println("Digite outro número: ");
+                num2 = scanner.nextInt();
+
+                // 6. Lógica e funcionamento da calculadora.
                 switch (operation) {
                     case '+':
                         result = num1 + num2;
@@ -67,20 +71,26 @@ public class calculator {
                         result = num1 / num2;
                         break;
                     default:
-                        System.out.println("Operação inválida! escolha uma operação válida para prosseguir...");
-                        break;
+                        throw new IllegalArgumentException("Operação inválida!");
                 }
             } catch (ArithmeticException e) {
                 hasError = true;
                 System.out.println("Erro: Não é possível dividir por 0!");
+            } catch (InputMismatchException e) {
+                hasError = true;
+                System.out.println("Erro: Digite um número válido!");
+            } catch (IllegalArgumentException e) {
+                hasError = true;
+                System.out.println("Erro: " + e.getMessage());
             }
 
             if (hasError) {
                 break;
             }
-            
+
             System.out.println("O resultado é: " + result);
         }
+
         scanner.close();
     }
 }
