@@ -10,8 +10,17 @@ public class main {
         // 2. Variáveis do projeto
         double num1, num2, result = 0;
         char operation;
+        int option;
 
-        // 3. Entrada de dados do usuário
+        // 3. Entrada de dados do usuário.
+        while (true) {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Iniciar");
+            System.out.println("2. Sair");
+            System.out.println("Escolha uma opção: ");
+
+            option = scanner.nextInt();
+
         System.out.println("Digite um número: ");
         num1 = scanner.nextDouble();
 
@@ -45,5 +54,6 @@ public class main {
         }
         System.out.println("O resultado é: " + result);
         scanner.close();
+        }
     }
 }
