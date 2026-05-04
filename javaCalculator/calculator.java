@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.text.DecimalFormat;
 import java.util.Scanner; // Importa a classe Scanner para seu usado no projeto.
 
 public class Calculator {
@@ -7,11 +8,13 @@ public class Calculator {
         Scanner scanner = new Scanner(System.in);
 
         // 2. Variáveis do projeto
-        int num1, num2, result = 0;
+        double num1, num2, result = 0;
         char operation;
         int option = 0;
         boolean hasError = false;
         boolean hasMenu = true;
+
+        DecimalFormat resultsFormat = new DecimalFormat("0.##########");
 
         // 3. Entrada de dados do usuário.
         // 3.1 While (true): cria um loop infinito.
@@ -55,13 +58,13 @@ public class Calculator {
             if (option == 1) {
                 try {
                     System.out.println("Digite um número: ");
-                    num1 = scanner.nextInt();
+                    num1 = scanner.nextDouble();
 
                     System.out.println("Escolha uma operaçãp: +, -, *, ou /");
                     operation = scanner.next().charAt(0);
 
                     System.out.println("Digite outro número: ");
-                    num2 = scanner.nextInt();
+                    num2 = scanner.nextDouble();
 
                     // 6. Lógica e funcionamento da calculadora.
                     switch (operation) {
@@ -81,9 +84,9 @@ public class Calculator {
                             throw new IllegalArgumentException("Operação inválida!");
                     }
 
-                    System.out.println("O resultado é: " + result);
+                    System.out.println("O resultado é: " + resultsFormat.format(result));
                     System.out.println("Operação finalizada!");
-                    System.out.println("Deseja: [1] Nova conta | [2] Voltar ao menu | [3] Sair");
+                    System.out.println("Deseja: [1] Nova conta | [2] Voltar ao menu");
                     int decision = scanner.nextInt();
 
                     if (decision == 1) {
@@ -91,8 +94,8 @@ public class Calculator {
                     } else if (decision == 2) {
                         hasMenu = true;
                     } else {
-                        System.out.println("\n--- Saindo do programa... ---");
-                        break;
+                        System.out.println("\n--- Opção inválida! ---");
+                        continue;
                     }
 
                 } catch (ArithmeticException e) {
